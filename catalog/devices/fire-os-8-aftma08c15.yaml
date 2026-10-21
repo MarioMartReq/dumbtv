@@ -1,7 +1,7 @@
 id: fire-os-8-aftma08c15
 title: "Amazon AFTMA08C15"
 platform: fireos
-status: partial
+status: tested
 tested_on: "RS8185.3891N"
 models:
   - "Fire TV Stick 4K Plus"
@@ -28,10 +28,10 @@ quirks:
   - "The package com.amazon.firebat is Prime Video on this build and must remain enabled."
   - "The first pass disabled 57 packages; after reboot 52 remained disabled. The returning packages were com.amazon.dummy.contacts, com.amazon.dummy.gallery, com.amazon.dummy.music, com.amazon.dummy.settings, and com.android.traceur."
   - "The unmodified dumbtv home 1.1 worked, including the owner pressing physical HOME from Stremio. The owner later selected Projectivy instead; dumbtv home was uninstalled."
-  - "Projectivy 4.72 from its developer GitHub release installed successfully and opened automatically after reboot without input. Its accessibility service remained bound, and injected HOME returned from Stremio to Projectivy. Amazon Settings remained accessible."
+  - "Projectivy 4.72 from its developer GitHub release installed successfully and opened automatically after reboot without input. Its accessibility service remained bound, and injected HOME returned from Stremio to Projectivy. The owner confirmed physical HOME from Stremio returns to Projectivy Favorites. Amazon Settings remained accessible."
   - "Projectivy hides Favorites by default. Add the streaming apps, enable Visible and Grid for Favorites, then hide the other home categories. The top settings menu still provides access to all apps and Android Settings."
   - "Restarting the host adb server fixed a stale connection error even though ping and the TCP port were reachable. The owner then accepted authorization."
-notes: "Fire OS 8.1.8.5: debloat and DNS hostname checks passed after reboot. Projectivy starts automatically with nine streaming apps in its Favorites grid. Its physical remote check is pending."
+notes: "Fire OS 8.1.8.5: debloat and DNS hostname checks passed after reboot. Projectivy starts automatically with nine streaming apps in its Favorites grid, and the owner confirmed physical HOME from Stremio returns to that grid."
 verify:
   blocked: data/blocklists/verify-blocked.txt
   allowed: data/blocklists/verify-allowed.txt
