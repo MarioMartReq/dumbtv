@@ -4,6 +4,7 @@
 # Format:  <display name>    <package>
 Netflix                     com.netflix.ninja
 Prime Video                 com.amazon.avod
+Prime Video (Fire TV)       com.amazon.firebat
 YouTube                     com.amazon.firetv.youtube
 YouTube Kids                com.amazon.firetv.youtube.kids
 VLC                         org.videolan.vlc

@@ -37,16 +37,15 @@ keep_pkg() {
   return 1
 }
 
-# Refuse to run when a keep entry matches nothing: a typo would otherwise remove
-# the app the user asked to keep.
+# Keep entries must name an installed app or a removal candidate, so typos fail safely.
 check_keep_list() {
   local k known
   [[ -z $KEEP_APPS ]] && return 0
   known=$(list_of "$(fos packages.txt)" | awk '{print $1}')
   known="$known $(list_of "$(fos user-apps.txt)" | awk '{print $1}') $REMOVE_EXTRA"
   for k in $KEEP_APPS; do
-    printf '%s\n' "$known" | tr ' ' '\n' | grep -qx "$k" ||
-      die "keep list entry '$k' matches nothing in the removal lists (typo?)"
+    printf '%s\n' "$known" | tr ' ' '\n' | grep -qx "$k" || present "$k" ||
+      die "keep list entry '$k' is neither installed nor listed for removal (typo?)"
   done
 }
 
@@ -56,7 +55,8 @@ ask_note() { printf '  %s\n' "$*"; }
 die()  { printf 'error: %s\n' "$*" >&2; exit 1; }
 
 dev()  { "$ADB" -s "$SERIAL" shell "$@" 2>&1 </dev/null; }
-dev1() { dev "$@" | head -1; }
+# Legacy adbd returns CRLF; normalize single-line replies before comparing them.
+dev1() { dev "$@" | head -1 | tr -d '\r'; }
 
 # A dropped connection must not look like "package absent".
 dev_ok() {

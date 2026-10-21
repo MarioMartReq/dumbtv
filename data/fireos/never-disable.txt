@@ -22,6 +22,7 @@ com.amazon.tv.oobe                     # first-run setup, needed after a factory
 com.amazon.tv.ooberesource
 com.amazon.webview.chromium            # webview, many apps break without it
 com.amazon.venezia                     # app store
+com.amazon.firebat                     # Prime Video on Fire OS 8, not an OTA helper
 com.amazon.vizzini                     # do not disable: it is a persistent priv-app that
                                        # then draws an undismissable "Unable to Detect Your
                                        # Remote" window over the TV. Block its domains instead.

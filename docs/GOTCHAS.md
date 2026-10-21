@@ -215,13 +215,13 @@ Advanced settings > Configure filter update, add
 the rest, reboot. The routing tweaks (`detectDNS = false`, `routeIPs`) cannot be set this
 way. `verify.sh` skips the list count there and relies on the blocked-host lookups.
 
-**HOME does not move to dumbtv home yet.** Android 11 blocks the Guard's alarm-fired
-launch as a background activity start (logcat: `Background activity start ...
-callingUidHasAnyVisibleWindow: false`). The service is bound, so `verify.sh` reports it
-as bound; press HOME to see the truth. Android's documented way past this is the
-"display over other apps" permission (`SYSTEM_ALERT_WINDOW`), which the launcher does
-not declare. Adding it is open: it would end the launcher's no-permissions rule, and it
-needs testing on a Fire OS 8 device.
+**Test HOME on each build.** On AFTKM with Fire OS 8.1.8.2, Android 11 blocks the
+Guard's alarm-fired launch as a background activity start (logcat: `Background
+activity start ... callingUidHasAnyVisibleWindow: false`). The service is bound,
+so `verify.sh` reports it as bound even though HOME stays on Amazon's screen.
+On AFTMA08C15 with Fire OS 8.1.8.5, the same launcher works without code or
+permission changes; the owner confirmed physical HOME returns from Stremio to
+dumbtv home. Check the physical remote as well as the service binding.
 
 **`com.amazon.dummy.settings` and `com.android.traceur` come back enabled after a
 reboot.** Re-run `debloat.sh` after a reboot to switch them off again.

@@ -79,7 +79,8 @@ for p in $(list_of "$(fos packages.txt)"); do
     *protected*)     printf '  %-46s PROTECTED\n' "$p"; protectedn=$((protectedn+1))
                      printf '%s\tprotected\n' "$p" >> "$log" ;;
     *)               printf '  %-46s SUSPECT: %s\n' "$p" "$out"; suspect=$((suspect+1))
-                     printf '%s\tsuspect\t%s\n' "$p" "$out" >> "$log" ;;
+                     printf '%s\tsuspect\t%s\n' "$p" "$out" >> "$log"
+                     die "stopped at unexpected package failure; see ${log#$ROOT/}" ;;
   esac
 done
 

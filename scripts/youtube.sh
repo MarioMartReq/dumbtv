@@ -64,7 +64,7 @@ else got=$(shasum -a 256 "$APK" | awk '{print $1}'); fi
 note "checksum ok"
 
 step "app"
-out=$("$ADB" -s "$SERIAL" install -r "$APK" 2>&1 | tail -1)
+out=$("$ADB" -s "$SERIAL" install -r "$APK" 2>&1)
 printf '  %s\n' "$out"
 case $out in
   *Success*|*"already exists"*) ;;
