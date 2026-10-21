@@ -1,0 +1,37 @@
+id: fire-os-8-aftma08c15
+title: "Amazon AFTMA08C15"
+platform: fireos
+status: partial
+tested_on: "RS8185.3891N"
+models:
+  - "Fire TV Stick 4K Plus"
+adb:
+  port: 5555
+  transport: wifi
+developer_mode: >-
+  Not recorded: ADB was already enabled before this session.
+ip_location: "Network screen; exact menu path not recorded."
+prompts:
+  - name: "USB debugging authorization"
+    blocks_automation: true
+    fix: "Owner selects Allow on the television."
+  - name: "Fire TV full-screen keyboard"
+    blocks_automation: true
+    fix: "Enter one field at a time through adb, close the keyboard, and inspect the UI before selecting another field."
+data:
+  packages: data/fireos/packages.txt
+  protected: data/fireos/protected.txt
+  never_disable: data/fireos/never-disable.txt
+  user_apps: data/fireos/user-apps.txt
+quirks:
+  - "Android 11 denies shell access to app-private Android/data storage. Import the DNS list from Android/media through the app, grant its storage permissions, disable default feeds, and use the normal in-app restart before rebooting. The log confirmed 410 entries and 397 unique entries."
+  - "The package com.amazon.firebat is Prime Video on this build and must remain enabled."
+  - "The first pass disabled 57 packages; after reboot 52 remained disabled. The returning packages were com.amazon.dummy.contacts, com.amazon.dummy.gallery, com.amazon.dummy.music, com.amazon.dummy.settings, and com.android.traceur."
+  - "The unmodified dumbtv home 1.1 worked, including the owner pressing physical HOME from Stremio. The owner later selected Projectivy instead; dumbtv home was uninstalled."
+  - "Projectivy 4.72 from its developer GitHub release installed successfully and opened automatically after reboot without input. Its accessibility service remained bound, and injected HOME returned from Stremio to Projectivy. Amazon Settings remained accessible."
+  - "Projectivy hides Favorites by default. Add the streaming apps, enable Visible and Grid for Favorites, then hide the other home categories. The top settings menu still provides access to all apps and Android Settings."
+  - "Restarting the host adb server fixed a stale connection error even though ping and the TCP port were reachable. The owner then accepted authorization."
+notes: "Fire OS 8.1.8.5: debloat and DNS hostname checks passed after reboot. Projectivy starts automatically with nine streaming apps in its Favorites grid. Its physical remote check is pending."
+verify:
+  blocked: data/blocklists/verify-blocked.txt
+  allowed: data/blocklists/verify-allowed.txt
